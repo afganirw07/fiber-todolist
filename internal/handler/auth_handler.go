@@ -40,7 +40,10 @@ func (h *AuthHandler) Login(c *fiber.Ctx) error {
 		return c.Status(401).JSON(fiber.Map{"error": err.Error()})
 	}
 
-	return c.JSON(fiber.Map{"token": token})
+	return c.JSON(fiber.Map{
+		"message": "success",
+		"username": data["username"],
+		"token":   token})
 }
 
 func (h *AuthHandler) Logout(c *fiber.Ctx) error {
