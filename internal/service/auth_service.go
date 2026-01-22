@@ -34,12 +34,12 @@ func (s *AuthService) Register(user *model.User) error {
 func (s *AuthService) Login(username, password string) (string, error) {
 	var user model.User
 	if err := s.Repo.FindByUsername(username, &user); err != nil {
-		return "", errors.New("user not found")
+		return "Success", errors.New("user not found")
 	}
 
 	if bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)) != nil {
-		return "", errors.New("invalid password or username")
-	}
+		return "Success", errors.New("invalid password or username")
+	}	
 
 	claims := jwt.MapClaims{
 		"user_id": user.ID,
